@@ -5,18 +5,19 @@ def get_player_pos() -> tuple[float, float, float]:
     while True:
         coords_str: str = input("Enter new coordinates\
 as floats in format 'x,y,z': ")
-        coords: list[str | float] = coords_str.split(',')
-        if len(coords) != 3:
+        params: list[str] = coords_str.split(',')
+        if len(params) != 3:
             print('Invalid syntax')
             continue
-        for i in range(len(coords)):
+        coords: list[float] = [0, 0, 0]
+        for i in range(len(params)):
             try:
-                coords[i] = float(coords[i].strip())
+                coords[i] = float(params[i].strip())
             except Exception:
-                print(f"Error on parameter '{coords[i]}':",
-                      f"could not convert string to float: '{coords[i]}'")
+                print(f"Error on parameter '{params[i]}':",
+                      f"could not convert string to float: '{params[i]}'")
                 continue
-        return tuple(coords)
+        return (coords[0], coords[1], coords[2])
 
 
 def calculate_distance(first: tuple[float, float, float],
